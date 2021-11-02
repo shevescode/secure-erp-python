@@ -76,6 +76,7 @@ def menu():
         display_menu()
         try:
             operation = view.get_input("Select an operation")
+            view.console_clear()
             run_operation(int(operation))
         except KeyError as err:
             view.print_error_message(err)

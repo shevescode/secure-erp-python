@@ -1,3 +1,5 @@
+import os
+
 def print_menu(title, list_options):
     """Prints options in standard menu format like this:
 
@@ -11,7 +13,9 @@ def print_menu(title, list_options):
         title (str): the title of the menu (first row)
         list_options (list): list of the menu options (listed starting from 1, 0th element goes to the end)
     """
-    pass
+    print(f"\n{title}: ")
+    for index, i in enumerate(list_options):
+        print(f"({index}) {i}")
 
 
 def print_message(message):
@@ -20,7 +24,7 @@ def print_message(message):
     Args:
         message: str - the message
     """
-    pass
+    print(message)
 
 
 def print_general_results(result, label):
@@ -54,7 +58,8 @@ def get_input(label):
     Args:
         label: str - the label before the user prompt
     """
-    pass
+    label = input("-->")
+    return label
 
 
 def get_inputs(labels):
@@ -72,4 +77,7 @@ def print_error_message(message):
     Args:
         message: str - the error message
     """
-    pass
+    print(message)
+
+def console_clear():
+    os.system('cls' if os.name == 'nt' else 'clear')

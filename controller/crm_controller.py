@@ -1,13 +1,23 @@
 from model.crm import crm
+from model.util import generate_id
 from view import terminal as view
+from model import data_manager as data
 
 
 def list_customers():
-    view.print_error_message("Not implemented yet.")
+    customer_list = data.read_table_from_file("model/crm/crm.csv", separator=';')
+    for index, i in enumerate(customer_list):
+        print(f"{index + 1}", i)
+
+    # view.print_error_message("Not implemented yet.")
 
 
 def add_customer():
-    view.print_error_message("Not implemented yet.")
+    name = crm.set_name()
+    mail = crm.set_email()
+    status = crm.set_subscribed()
+    id = generate_id()
+    # view.print_error_message("Not implemented yet.")
 
 
 def update_customer():
@@ -55,6 +65,7 @@ def menu():
         display_menu()
         try:
             operation = view.get_input("Select an operation")
+            view.console_clear()
             run_operation(int(operation))
         except KeyError as err:
             view.print_error_message(err)
