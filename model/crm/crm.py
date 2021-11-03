@@ -27,4 +27,4 @@ def set_subscribed():
 
 
 DATAFILE = "model/crm/crm.csv"
-HEADERS = ["id", "name", "email", "subscribed"]
+HEADERS = "id", "name", "email", "subscribed"

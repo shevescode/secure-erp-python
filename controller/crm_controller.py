@@ -2,21 +2,36 @@ from model.crm import crm
 from model.util import generate_id
 from view import terminal as view
 from model import data_manager as data
+from tabulate import tabulate
+
 
 
 def list_customers():
-    customer_list = data.read_table_from_file("model/crm/crm.csv", separator=';')
-    for index, i in enumerate(customer_list):
+    table = data.read_table_from_file("model/crm/crm.csv", separator=';')
+    print(table)
+    for index, i in enumerate(table):
         print(f"{index + 1}", i)
-
+    print(tabulate(table, headers=crm.HEADERS, tablefmt='fancy_grid', showindex=True))
     # view.print_error_message("Not implemented yet.")
 
 
 def add_customer():
+    table = data.read_table_from_file("model/crm/crm.csv", separator=';')
     name = crm.set_name()
     mail = crm.set_email()
     status = crm.set_subscribed()
     id = generate_id()
+    record = id, name, mail, status
+    row = [
+
+                record[0],
+                record[1],
+                record[2],
+                record[3],
+
+    ]
+    table.append(row)
+    data.write_table_to_file("model/crm/crm.csv", table, separator=';')
     # view.print_error_message("Not implemented yet.")
 
 
