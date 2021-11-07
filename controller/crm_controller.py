@@ -8,11 +8,7 @@ from tabulate import tabulate
 
 def list_customers():
     table = data.read_table_from_file("model/crm/crm.csv", separator=';')
-    print(table)
-    for index, i in enumerate(table):
-        print(f"{index + 1}", i)
     print(tabulate(table, headers=crm.HEADERS, tablefmt='fancy_grid', showindex=True))
-    # view.print_error_message("Not implemented yet.")
 
 
 def add_customer():
@@ -32,20 +28,53 @@ def add_customer():
     ]
     table.append(row)
     data.write_table_to_file("model/crm/crm.csv", table, separator=';')
-    # view.print_error_message("Not implemented yet.")
 
 
 def update_customer():
-    view.print_error_message("Not implemented yet.")
+    #TODO: zrobic funkcje change.. uniwersalne
+    view.console_clear()
+    list_customers()
+    table = data.read_table_from_file("model/crm/crm.csv", separator=';')
+    print("Which customer info would you like to update?")
+    operation = int(view.get_input(""))
 
+    for index, i in enumerate(table):
+        if operation == index:
+            i[0] = crm.change_id(i[0])
+            i[1] = crm.change_name(i[1])
+            i[2] = crm.change_email(i[2])
+            i[3] = crm.change_subscribed(i[3])
+    data.write_table_to_file("model/crm/crm.csv", table, separator=';')
 
 def delete_customer():
-    view.print_error_message("Not implemented yet.")
-
+    view.console_clear()
+    list_customers()
+    table = data.read_table_from_file("model/crm/crm.csv", separator=';')
+    print("Which customer would you like to delete?")
+    operation = int(view.get_input(""))
+    for index, i in enumerate(table):
+        if operation == index:
+            option = input("Are you sure? Y/N\n")
+            if option == "y" or option == "yes":
+                table.remove(i)
+                data.write_table_to_file("model/crm/crm.csv", table, separator=';')
+            elif option == "n" or option == "no":
+                break
+    view.console_clear()
+    list_customers()
 
 def get_subscribed_emails():
-    view.print_error_message("Not implemented yet.")
+    list_of_subscribed_emails = []
+    table = data.read_table_from_file("model/crm/crm.csv", separator=';')
+    print(tabulate(table, headers=crm.HEADERS, tablefmt='fancy_grid', showindex=True))
 
+    for i in table:
+        if i[3] == "1":
+            x = []
+            x.append(i[2])
+            list_of_subscribed_emails.append(x)
+
+    print(tabulate(list_of_subscribed_emails, headers=["Subscribed emails"], tablefmt='fancy_grid', showindex=True))
 
 def run_operation(option):
     if option == 1:

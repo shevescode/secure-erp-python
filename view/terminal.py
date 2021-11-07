@@ -59,6 +59,7 @@ def get_input(label):
         label: str - the label before the user prompt
     """
     label = input("-->")
+
     return label
 
 
