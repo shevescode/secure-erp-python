@@ -35,23 +35,21 @@ def update_customer():
     view.console_clear()
     list_customers()
     table = data.read_table_from_file("model/crm/crm.csv", separator=';')
-    print("Which customer info would you like to update?")
-    operation = int(view.get_input(""))
+    operation = int(view.get_input("Which customer info would you like to update?"))
 
     for index, i in enumerate(table):
         if operation == index:
             i[0] = crm.change_id(i[0])
-            i[1] = crm.change_name(i[1])
-            i[2] = crm.change_email(i[2])
-            i[3] = crm.change_subscribed(i[3])
+            i[1] = crm.change_name(i[1], "name")
+            i[2] = crm.change_name(i[2], "email")
+            i[3] = crm.change_name(i[3], "status")
     data.write_table_to_file("model/crm/crm.csv", table, separator=';')
 
 def delete_customer():
     view.console_clear()
     list_customers()
     table = data.read_table_from_file("model/crm/crm.csv", separator=';')
-    print("Which customer would you like to delete?")
-    operation = int(view.get_input(""))
+    operation = int(view.get_input("Which customer would you like to delete?"))
     for index, i in enumerate(table):
         if operation == index:
             option = input("Are you sure? Y/N\n")

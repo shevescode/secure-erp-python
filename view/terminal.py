@@ -58,9 +58,10 @@ def get_input(label):
     Args:
         label: str - the label before the user prompt
     """
-    label = input("-->")
+    print(f"{label}")
+    user_input = input("-->")
 
-    return label
+    return user_input
 
 
 def get_inputs(labels):
