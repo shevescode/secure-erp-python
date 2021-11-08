@@ -7,11 +7,13 @@ from tabulate import tabulate
 
 
 def list_customers():
+    """Reads customers' data from a file and prints it as a table"""
     table = data.read_table_from_file("model/crm/crm.csv", separator=';')
     print(tabulate(table, headers=crm.HEADERS, tablefmt='fancy_grid', showindex=True))
 
 
 def add_customer():
+    """Allows for adding new customers' data and overwrites a file"""
     table = data.read_table_from_file("model/crm/crm.csv", separator=';')
     name = crm.set_name()
     mail = crm.set_email()
@@ -31,7 +33,7 @@ def add_customer():
 
 
 def update_customer():
-    #TODO: zrobic funkcje change.. uniwersalne
+    """"""
     view.console_clear()
     list_customers()
     table = data.read_table_from_file("model/crm/crm.csv", separator=';')
@@ -40,10 +42,11 @@ def update_customer():
     for index, i in enumerate(table):
         if operation == index:
             i[0] = crm.change_id(i[0])
-            i[1] = crm.change_name(i[1], "name")
-            i[2] = crm.change_name(i[2], "email")
-            i[3] = crm.change_name(i[3], "status")
+            i[1] = crm.change_data(i[1], "name")
+            i[2] = crm.change_data(i[2], "email")
+            i[3] = crm.change_data(i[3], "status")
     data.write_table_to_file("model/crm/crm.csv", table, separator=';')
+
 
 def delete_customer():
     view.console_clear()
