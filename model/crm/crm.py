@@ -10,22 +10,12 @@ Data table structure:
 from typing import MutableMapping
 from model import data_manager, util
 from view import terminal as view
-import time
 
-def set_name():
-    """Asks for input to set a name and returns the input value"""
-    name = input("Write customer name:\n")
-    return name
-
-def set_email():
-    """Asks for input to set email address and returns the input value"""
-    mail = input("Write customer mail:\n")
-    return mail
-
-def set_subscribed():
-    """Asks for input to set subscribtion status and returns the input value"""
-    subsctibtion_status = input("Subscribtion status (1: yes, 0: no):")
-    return subsctibtion_status
+def set_customer_data(message):
+    """Asks for input to set new customer data (name, email, subscription) and returns the input value"""
+    view.console_clear()
+    data = input(f"{message}\n")
+    return data
 
 def change_id(id):
     """Prints actual ID, calls for generate_id() to generate a new ID and returns new ID to be changed in file"""
@@ -64,11 +54,11 @@ def change_data(data, label):
             view.console_clear()
             print(f"Actual {label} is {data}")
             if label == "name":
-                new_data = set_name()
+                new_data = set_customer_data("Write customer name:")
             elif label == "email":
-                new_data = set_email()
+                new_data = set_customer_data("Write customer email:")
             elif label == "status":
-                new_data = set_subscribed()
+                new_data = set_customer_data("Subscription status (1: yes, 0: no):")
 
             while True:
                 view.console_clear()

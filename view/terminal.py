@@ -82,4 +82,5 @@ def print_error_message(message):
     print(message)
 
 def console_clear():
+    """Clears terminal"""
     os.system('cls' if os.name == 'nt' else 'clear')

@@ -3,7 +3,7 @@ from model.util import generate_id
 from view import terminal as view
 from model import data_manager as data
 from tabulate import tabulate
-
+import os
 
 
 def list_customers():
@@ -13,27 +13,28 @@ def list_customers():
 
 
 def add_customer():
-    """Allows for adding new customers' data and overwrites a file"""
+    """Allows for adding new customers' data, overwrites a file and prints new customer's data"""
     table = data.read_table_from_file("model/crm/crm.csv", separator=';')
-    name = crm.set_name()
-    mail = crm.set_email()
-    status = crm.set_subscribed()
+    name = crm.set_customer_data("Write customer name:")
+    mail = crm.set_customer_data("Write customer email:")
+    status = crm.set_customer_data("Subscription status (1: yes, 0: no):")
     id = generate_id()
-    record = id, name, mail, status
-    row = [
-
-                record[0],
-                record[1],
-                record[2],
-                record[3],
-
-    ]
+    row = [id, name, mail, status]
     table.append(row)
     data.write_table_to_file("model/crm/crm.csv", table, separator=';')
 
+    print(f"""Customer data added:
+
+    ID: {id}
+    name: {name}
+    email: {mail}
+    Is subscribed to the newsletter? {status}
+    """)
+    os.system('pause')
+    view.console_clear()
 
 def update_customer():
-    """"""
+    """Allows for updating customers' data and overwrites file"""
     view.console_clear()
     list_customers()
     table = data.read_table_from_file("model/crm/crm.csv", separator=';')
@@ -49,25 +50,26 @@ def update_customer():
 
 
 def delete_customer():
+    """Allows for deleting customer and removes data from file"""
     view.console_clear()
     list_customers()
     table = data.read_table_from_file("model/crm/crm.csv", separator=';')
     operation = int(view.get_input("Which customer would you like to delete?"))
     for index, i in enumerate(table):
         if operation == index:
-            option = input("Are you sure? Y/N\n")
-            if option == "y" or option == "yes":
+            option = input("Are you sure? Enter 'yes' or 'no'\n")
+            if option == "yes":
                 table.remove(i)
                 data.write_table_to_file("model/crm/crm.csv", table, separator=';')
-            elif option == "n" or option == "no":
+            elif option == "no":
                 break
     view.console_clear()
     list_customers()
 
 def get_subscribed_emails():
+    """Reads file and returns the emails of subscribed customers"""
     list_of_subscribed_emails = []
     table = data.read_table_from_file("model/crm/crm.csv", separator=';')
-    print(tabulate(table, headers=crm.HEADERS, tablefmt='fancy_grid', showindex=True))
 
     for i in table:
         if i[3] == "1":
@@ -78,6 +80,7 @@ def get_subscribed_emails():
     print(tabulate(list_of_subscribed_emails, headers=["Subscribed emails"], tablefmt='fancy_grid', showindex=True))
 
 def run_operation(option):
+    """Invokes (calls for) functions depending on user's input"""
     if option == 1:
         list_customers()
     elif option == 2:
@@ -95,6 +98,7 @@ def run_operation(option):
 
 
 def display_menu():
+    """Displays menu options"""
     options = ["Back to main menu",
                "List customers",
                "Add new customer",
@@ -105,11 +109,13 @@ def display_menu():
 
 
 def menu():
+    """ʕ•ᴥ•ʔ ʕ•ᴥ•ʔExecutes menu...... ᶘᵒᴥᵒᶅ ........... ( ͡° ͜ʖ ͡°)
+    [̲̅$̲̅(̲̅ιοο̲̅)̲̅$̲̅] ◕‿◕ [̲̅$̲̅(̲̅ιοο̲̅)̲̅$̲̅] [̲̅$̲̅(̲̅ιοο̲̅)̲̅$̲̅] [̲̅$̲̅(̲̅ιοο̲̅)̲̅$̲̅] ◕‿◕ [̲̅$̲̅(̲̅ιοο̲̅)̲̅$̲̅]"""
     operation = None
     while operation != '0':
         display_menu()
         try:
-            operation = view.get_input("Select an operation")
+            operation = view.get_input("Select an operation ʕ•ᴥ•ʔ")
             view.console_clear()
             run_operation(int(operation))
         except KeyError as err:
