@@ -11,12 +11,6 @@ from typing import MutableMapping
 from model import data_manager, util
 from view import terminal as view
 
-def set_customer_data(message):
-    """Asks for input to set new customer data (name, email, subscription) and returns the input value"""
-    view.console_clear()
-    data = input(f"{message}\n")
-    return data
-
 def change_id(id):
     """Prints actual ID, calls for generate_id() to generate a new ID and returns new ID to be changed in file"""
     while True:
@@ -54,11 +48,11 @@ def change_data(data, label):
             view.console_clear()
             print(f"Actual {label} is {data}")
             if label == "name":
-                new_data = set_customer_data("Write customer name:")
+                new_data = view.set_data("Write customer name:")
             elif label == "email":
-                new_data = set_customer_data("Write customer email:")
+                new_data = view.set_data("Write customer email:")
             elif label == "status":
-                new_data = set_customer_data("Subscription status (1: yes, 0: no):")
+                new_data = view.set_data("Subscription status (1: yes, 0: no):")
 
             while True:
                 view.console_clear()

@@ -15,20 +15,16 @@ def list_customers():
 def add_customer():
     """Allows for adding new customers' data, overwrites a file and prints new customer's data"""
     table = data.read_table_from_file("model/crm/crm.csv", separator=';')
-    name = crm.set_customer_data("Write customer name:")
-    mail = crm.set_customer_data("Write customer email:")
-    status = crm.set_customer_data("Subscription status (1: yes, 0: no):")
-    id = generate_id()
-    row = [id, name, mail, status]
+    row = view.get_inputs("crm")
     table.append(row)
     data.write_table_to_file("model/crm/crm.csv", table, separator=';')
 
     print(f"""Customer data added:
 
-    ID: {id}
-    name: {name}
-    email: {mail}
-    Is subscribed to the newsletter? {status}
+    ID: {row[0]}
+    name: {row[1]}
+    email: {row[2]}
+    Is subscribed to the newsletter? {row[3]}
     """)
     os.system('pause')
     view.console_clear()

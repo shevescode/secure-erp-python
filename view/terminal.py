@@ -1,4 +1,6 @@
 import os
+from model import util
+from controller import sales_controller
 
 def print_menu(title, list_options):
     """Prints options in standard menu format like this:
@@ -70,8 +72,22 @@ def get_inputs(labels):
     Args:
         labels: list - the list of the labels to be displayed before each prompt
     """
-    pass
+    if labels == "sales":
+        customer_id = sales_controller.get_customer_id_for_transaction()
+        print(customer_id)
+        os.system("pause")
+        product = set_data("Enter product name: \n")
+        price = set_data("Enter the price: \n")
+        transaction_date = set_data("Enter the date (like 1996-11-30): \n")
+        transaction_id = util.generate_id()
+        return [transaction_id, customer_id, product, price, transaction_date]
 
+    elif labels == "crm":
+        name = set_data("Enter customer name:")
+        mail = set_data("Enter customer email:")
+        status = set_data("Subscription status (1: yes, 0: no):")
+        id = util.generate_id()
+        return [id, name, mail, status]
 
 def print_error_message(message):
     """Prints an error message to the terminal.
@@ -84,3 +100,10 @@ def print_error_message(message):
 def console_clear():
     """Clears terminal"""
     os.system('cls' if os.name == 'nt' else 'clear')
+
+
+def set_data(message):
+    """Asks for input to set new customer data (name, email, subscription, id, price, product, transaction date) and returns the input value"""
+    console_clear()
+    data = input(f"{message}\n")
+    return data
