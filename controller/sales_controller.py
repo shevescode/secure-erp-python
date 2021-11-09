@@ -43,13 +43,13 @@ def get_customer_id_for_transaction():
             x.append(i[1])
             list_of_customers_id.append(x)
         print(tabulate(list_of_customers_id, headers=["ID", "Name"], tablefmt='fancy_grid', showindex=True))
-        print(list_of_customers_id)
         print("If you can't see the customer on the list, enter 'add' to add the new customer")
         while True:
             try:
                 customer_index = input("Choose customer(index): \n")
-                if int(customer_index) >= 0:
-                    return list_of_customers_id[customer_index][0]
+                if int(customer_index) in range(len(list_of_customers_id)):
+                    x = int(customer_index)
+                    return list_of_customers_id[x][0]
             except ValueError:
                 if str(customer_index) == "add":
                     crm_controller.add_customer()
@@ -66,8 +66,24 @@ def delete_transaction():
 
 
 def get_biggest_revenue_transaction():
-    view.print_error_message("Not implemented yet.")
 
+    table = data.read_table_from_file("model/sales/sales.csv", separator=';')
+    x = 0
+    y = 0
+    for index, value in enumerate(table):
+        if float(value[3]) > x:
+            y, x = index, float(value[3])
+
+    view.console_clear()
+    print(f"""Transaction with the biggest revenue is:
+
+    transaction ID: {table[y][0]}
+    customer ID: {table[y][1]}
+    product: {table[y][2]}
+    price: {table[y][3]}
+    transaction date: {table[y][4]}
+    """)
+    os.system("pause")
 
 def get_biggest_revenue_product():
     view.print_error_message("Not implemented yet.")

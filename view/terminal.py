@@ -74,8 +74,6 @@ def get_inputs(labels):
     """
     if labels == "sales":
         customer_id = sales_controller.get_customer_id_for_transaction()
-        print(customer_id)
-        os.system("pause")
         product = set_data("Enter product name: \n")
         price = set_data("Enter the price: \n")
         transaction_date = set_data("Enter the date (like 1996-11-30): \n")
