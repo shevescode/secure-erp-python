@@ -25,6 +25,7 @@ def add_customer():
     name: {row[1]}
     email: {row[2]}
     Is subscribed to the newsletter? {row[3]}
+
     """)
     os.system('pause')
     view.console_clear()
@@ -105,13 +106,12 @@ def display_menu():
 
 
 def menu():
-    """ʕ•ᴥ•ʔ ʕ•ᴥ•ʔExecutes menu...... ᶘᵒᴥᵒᶅ ........... ( ͡° ͜ʖ ͡°)
-    [̲̅$̲̅(̲̅ιοο̲̅)̲̅$̲̅] ◕‿◕ [̲̅$̲̅(̲̅ιοο̲̅)̲̅$̲̅] [̲̅$̲̅(̲̅ιοο̲̅)̲̅$̲̅] [̲̅$̲̅(̲̅ιοο̲̅)̲̅$̲̅] ◕‿◕ [̲̅$̲̅(̲̅ιοο̲̅)̲̅$̲̅]"""
+    """Executes menu"""
     operation = None
     while operation != '0':
         display_menu()
         try:
-            operation = view.get_input("Select an operation ʕ•ᴥ•ʔ")
+            operation = view.get_input("Select an operation")
             view.console_clear()
             run_operation(int(operation))
         except KeyError as err:

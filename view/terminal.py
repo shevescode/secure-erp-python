@@ -18,6 +18,7 @@ def print_menu(title, list_options):
     print(f"\n{title}: ")
     for index, i in enumerate(list_options):
         print(f"({index}) {i}")
+    #FIXME: exit na koncu listy
 
 
 def print_message(message):
@@ -52,6 +53,7 @@ def print_table(table):
         table: list of lists - the table to print out
     """
     pass
+    #TODO: przenies implementacje
 
 
 def get_input(label):
@@ -64,6 +66,7 @@ def get_input(label):
     user_input = input("-->")
 
     return user_input
+    #FIXME: input(label)
 
 
 def get_inputs(labels):
@@ -86,6 +89,7 @@ def get_inputs(labels):
         status = set_data("Subscription status (1: yes, 0: no):")
         id = util.generate_id()
         return [id, name, mail, status]
+    #FIXME: na zadane etykiety odpowiada lista od uzytkownika
 
 def print_error_message(message):
     """Prints an error message to the terminal.

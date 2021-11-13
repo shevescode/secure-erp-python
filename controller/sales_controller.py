@@ -71,7 +71,6 @@ def update_transaction():
         if updating_transaction == index:
             value[0] = sales.change_ids(value[0], "transaction_id")
             value[1] = sales.change_ids(value[1], "customer_id")
-            data.write_table_to_file("model/crm/crm.csv", table, separator=';')
             value[2] = sales.change_transaction_data(value[2], "product")
             value[3] = sales.change_transaction_data(value[3], "price")
             value[4] = sales.change_transaction_data(value[4], "transaction_date")
@@ -186,13 +185,12 @@ def display_menu():
 
 
 def menu():
-    """ʕ•ᴥ•ʔ ʕ•ᴥ•ʔExecutes menu...... ᶘᵒᴥᵒᶅ ........... ( ͡° ͜ʖ ͡°)
-    [̲̅$̲̅(̲̅ιοο̲̅)̲̅$̲̅] ◕‿◕ [̲̅$̲̅(̲̅ιοο̲̅)̲̅$̲̅] [̲̅$̲̅(̲̅ιοο̲̅)̲̅$̲̅] [̲̅$̲̅(̲̅ιοο̲̅)̲̅$̲̅] ◕‿◕ [̲̅$̲̅(̲̅ιοο̲̅)̲̅$̲̅]"""
+    """Executes menu"""
     operation = None
     while operation != '0':
         display_menu()
         try:
-            operation = view.get_input("Select an operation [̲̅$̲̅(̲̅ιοο̲̅)̲̅$̲̅]")
+            operation = view.get_input("Select an operation")
             view.console_clear()
             run_operation(int(operation))
         except KeyError as err:
