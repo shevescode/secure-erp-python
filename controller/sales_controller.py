@@ -20,6 +20,7 @@ def add_transaction():
     row = view.get_inputs("sales")
     table.append(row)
     data.write_table_to_file("model/sales/sales.csv", table, separator=';')
+    os.system('pause')
 
     print(f"""Another transaction added:
 
@@ -58,7 +59,6 @@ def get_customer_id_for_transaction():
                     crm_controller.add_customer()
                 else:
                     continue
-    os.system('pause')
 
 
 def update_transaction():

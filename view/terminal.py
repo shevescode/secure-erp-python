@@ -98,7 +98,8 @@ def print_error_message(message):
     Args:
         message: str - the error message
     """
-    print(message)
+    print(f"Error! f{message}")
+    os.system('pause')
 
 def console_clear():
     """Clears terminal"""
