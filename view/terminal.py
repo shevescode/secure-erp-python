@@ -15,6 +15,7 @@ def print_menu(title, list_options):
         title (str): the title of the menu (first row)
         list_options (list): list of the menu options (listed starting from 1, 0th element goes to the end)
     """
+    console_clear()
     print(f"\n{title}: ")
     for index, i in enumerate(list_options):
         print(f"({index}) {i}")

@@ -10,6 +10,7 @@ def list_customers():
     """Reads customers' data from a file and prints it as a table"""
     table = data.read_table_from_file("model/crm/crm.csv", separator=';')
     print(tabulate(table, headers=crm.HEADERS, tablefmt='fancy_grid', showindex=True))
+    os.system('pause')
 
 
 def add_customer():
@@ -39,11 +40,12 @@ def update_customer():
 
     for index, i in enumerate(table):
         if operation == index:
-            i[0] = crm.change_id(i[0])
+            # i[0] = crm.change_id(i[0])
             i[1] = crm.change_data(i[1], "name")
             i[2] = crm.change_data(i[2], "email")
             i[3] = crm.change_data(i[3], "status")
     data.write_table_to_file("model/crm/crm.csv", table, separator=';')
+    os.system('pause')
 
 
 def delete_customer():
@@ -62,6 +64,7 @@ def delete_customer():
                 break
     view.console_clear()
     list_customers()
+    os.system('pause')
 
 def get_subscribed_emails():
     """Reads file and returns the emails of subscribed customers"""
@@ -75,6 +78,7 @@ def get_subscribed_emails():
             list_of_subscribed_emails.append(x)
 
     print(tabulate(list_of_subscribed_emails, headers=["Subscribed emails"], tablefmt='fancy_grid', showindex=True))
+    os.system('pause')
 
 def run_operation(option):
     """Invokes (calls for) functions depending on user's input"""

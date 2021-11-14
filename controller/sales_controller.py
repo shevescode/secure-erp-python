@@ -11,6 +11,7 @@ def list_of_transactions():
     """Reads list of sales transactions from a file and prints it as a table"""
     table = data.read_table_from_file("model/sales/sales.csv", separator=';')
     print(tabulate(table, headers=sales.HEADERS, tablefmt='fancy_grid', showindex=True))
+    os.system('pause')
 
 
 def add_transaction():
@@ -57,6 +58,7 @@ def get_customer_id_for_transaction():
                     crm_controller.add_customer()
                 else:
                     continue
+    os.system('pause')
 
 
 def update_transaction():
@@ -69,12 +71,13 @@ def update_transaction():
 
     for index, value in enumerate(table):
         if updating_transaction == index:
-            value[0] = sales.change_ids(value[0], "transaction_id")
-            value[1] = sales.change_ids(value[1], "customer_id")
+            # value[0] = sales.change_ids(value[0], "transaction_id")
+            # value[1] = sales.change_ids(value[1], "customer_id")
             value[2] = sales.change_transaction_data(value[2], "product")
             value[3] = sales.change_transaction_data(value[3], "price")
             value[4] = sales.change_transaction_data(value[4], "transaction_date")
     data.write_table_to_file("model/sales/sales.csv", table, separator=';')
+    os.system('pause')
 
 
 def delete_transaction():
@@ -94,6 +97,7 @@ def delete_transaction():
                 break
     view.console_clear()
     list_of_transactions()
+    os.system('pause')
 
 
 
